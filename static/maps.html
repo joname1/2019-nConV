@@ -38,7 +38,7 @@
 
         // 构造数据
             while (randomCount--) {
-                let Info = JSON.parse(sessionStorage.getItem('CityInfo'));
+                let Info = JSON.parse(localStorage.getItem('CityInfo'));
                 console.log('ee', Info)
                 Info.map((res) => {
                     datas.push({
