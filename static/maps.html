@@ -26,32 +26,33 @@
 
     <div id="map"></div>
     <canvas id="canvas"></canvas>
-
+    <script>
+        window.addEventListener('message', (e) => {
+            sessionStorage.setItem('CityInfo', JSON.stringify(e.data.data))
+        })  
+    </script>
     <script src="https://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
     <script src="https://mapv.baidu.com/build/mapv.js"></script>
 
     <script>
         // 百度地图API功能
-        var map = new BMap.Map("map", {
+        let map = new BMap.Map("map", {
             enableMapClick: false
-        });    // 创建Map实例
-        map.centerAndZoom(new BMap.Point(110.031190, 28.028658), 5);  // 初始化地图,设置中心点坐标和地图级别
+        });
+        map.centerAndZoom(new BMap.Point(110.031190, 28.028658), 3);  // 初始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
 
         map.setMapStyle({
             style: 'midnight'
         });
 
-        var randomCount = 300;
+        let randomCount = 500;
 
-        var datas = [];
-
-        var citys = JSON.parse(window.sessionStorage.getItem('CityList'));
+        let datas = [];
 
         // 构造数据
         while (randomCount--) {
-            let Info = JSON.parse(window.sessionStorage.getItem('CityInfo'));
-
+            let Info = JSON.parse(sessionStorage.getItem('CityInfo'));
             Info.map((res) => {
                 datas.push({
                     geometry: {
@@ -63,9 +64,9 @@
             })
         }
 
-        var dataSet = new mapv.DataSet(datas);
+        let dataSet = new mapv.DataSet(datas);
 
-        var options = {
+        let options = {
             shadowColor: 'rgba(255, 50, 50, 1)',
             shadowBlur: 30,
             fillStyle: 'rgba(255, 50, 50, 0.6)',
@@ -73,20 +74,13 @@
             max: 30,
             draw: 'bubble',
             methods: {
-                click: function (item) {
-                    console.log(item);  // 点击事件
+                click: (item) => {
+                    console.log(item);
                 }
-            },
-            label: { // 聚合文本样式
-                show: true, // 是否显示
-                fillStyle: 'white',
-                // shadowColor: 'yellow',
-                // font: '20px Arial',
-                // shadowBlur: 10,
-            },
+            }
         }
 
-        var mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
+        let mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
     </script>
 
 </body>
