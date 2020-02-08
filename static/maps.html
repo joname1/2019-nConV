@@ -26,16 +26,31 @@
 
     <div id="map"></div>
     <canvas id="canvas"></canvas>
-    <script>
-        window.addEventListener('message', (e) => {
-            sessionStorage.setItem('CityInfo', JSON.stringify(e.data.data))
-        })  
-    </script>
+
     <script src="https://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
     <script src="https://mapv.baidu.com/build/mapv.js"></script>
 
     <script>
         // 百度地图API功能
+        let randomCount = 500;
+
+        let datas = [];
+
+        // 构造数据
+            while (randomCount--) {
+                let Info = JSON.parse(sessionStorage.getItem('CityInfo'));
+                console.log('ee', Info)
+                Info.map((res) => {
+                    datas.push({
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [res.lng, res.lat]
+                        },
+                        count: res.value
+                    })
+                })
+            }
+
         let map = new BMap.Map("map", {
             enableMapClick: false
         });
@@ -45,24 +60,6 @@
         map.setMapStyle({
             style: 'midnight'
         });
-
-        let randomCount = 500;
-
-        let datas = [];
-
-        // 构造数据
-        while (randomCount--) {
-            let Info = JSON.parse(sessionStorage.getItem('CityInfo'));
-            Info.map((res) => {
-                datas.push({
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [res.lng, res.lat]
-                    },
-                    count: res.value
-                })
-            })
-        }
 
         let dataSet = new mapv.DataSet(datas);
 
