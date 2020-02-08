@@ -27,6 +27,12 @@
     <div id="map"></div>
     <canvas id="canvas"></canvas>
 
+    <script>
+        window.addEventListener('message', (e) => {
+            sessionStorage.setItem('CityInfo', JSON.stringify(e.data.data))
+            console.log('set', e.data)
+        })
+    </script>
     <script src="https://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
     <script src="https://mapv.baidu.com/build/mapv.js"></script>
 
@@ -38,8 +44,8 @@
 
         // 构造数据
             while (randomCount--) {
-                let Info = JSON.parse(localStorage.getItem('CityInfo'));
-                console.log('ee', Info)
+                let Info = JSON.parse(sessionStorage.getItem('CityInfo'));
+                console.log('get', Info)
                 Info.map((res) => {
                     datas.push({
                         geometry: {
@@ -50,6 +56,7 @@
                     })
                 })
             }
+        
 
         let map = new BMap.Map("map", {
             enableMapClick: false
