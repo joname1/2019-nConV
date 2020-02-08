@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+    <meta charset="UTF-8">
+    <title></title>
 
     <style type="text/css">
-        html, body {
+        html,
+        body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -19,6 +21,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div id="map"></div>
@@ -32,7 +35,7 @@
         var map = new BMap.Map("map", {
             enableMapClick: false
         });    // 创建Map实例
-        map.centerAndZoom(new BMap.Point(105.931190, 38.028658), 5);  // 初始化地图,设置中心点坐标和地图级别
+        map.centerAndZoom(new BMap.Point(110.031190, 28.028658), 5);  // 初始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
 
         map.setMapStyle({
@@ -41,23 +44,26 @@
 
         var randomCount = 300;
 
-        var data = [];
+        var datas = [];
 
-        var citys = ["北京","天津","上海","重庆","石家庄","太原","呼和浩特","哈尔滨","长春","沈阳","济南","南京","合肥","杭州","南昌","福州","郑州","武汉","长沙","广州","南宁","西安","银川","兰州","西宁","乌鲁木齐","成都","贵阳","昆明","拉萨","海口"];
+        var citys = JSON.parse(window.sessionStorage.getItem('CityList'));
 
         // 构造数据
         while (randomCount--) {
-            var cityCenter = mapv.utilCityCenter.getCenterByCityName(citys[parseInt(Math.random() * citys.length)]);
-            data.push({
-                geometry: {
-                    type: 'Point',
-                    coordinates: [cityCenter.lng, cityCenter.lat]
-                },
-                count: Math.random()*1000
-            });
+            let Info = JSON.parse(window.sessionStorage.getItem('CityInfo'));
+
+            Info.map((res) => {
+                datas.push({
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [res.lng, res.lat]
+                    },
+                    count: res.value
+                })
+            })
         }
 
-        var dataSet = new mapv.DataSet(data);
+        var dataSet = new mapv.DataSet(datas);
 
         var options = {
             shadowColor: 'rgba(255, 50, 50, 1)',
@@ -66,11 +72,23 @@
             maxSize: 20,
             max: 30,
             draw: 'bubble',
-           
+            methods: {
+                click: function (item) {
+                    console.log(item);  // 点击事件
+                }
+            },
+            label: { // 聚合文本样式
+                show: true, // 是否显示
+                fillStyle: 'white',
+                // shadowColor: 'yellow',
+                // font: '20px Arial',
+                // shadowBlur: 10,
+            },
         }
 
         var mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
     </script>
-	
+
 </body>
+
 </html>
