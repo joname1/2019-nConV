@@ -1,30 +1,38 @@
 import React, { Component } from 'react';
-import { Icon, Tabs, Badge } from 'antd-mobile';
-import Results from './Results'
-import Trends from './Trends'
-import Locations from './Locations'
+import { Tabs, Badge } from 'antd-mobile';
+import Results from './Results';
+import Trends from './Trends';
+import Areas from './Areas';
+import Locations from './Locations';
 import styles from './App.css';
 
 const tabs = [
   { title: <Badge>综合</Badge> },
   { title: <Badge>趋势</Badge> },
+  { title: <Badge>查询</Badge> },
   { title: <Badge>地图</Badge> },
 ];
 
 const TabExample = () => (
-  <div>
+  <div style={{paddingBottom: 10}}>
     <Tabs tabs={tabs}
       initialPage={0}
-      onChange={(tab, index) => { console.log('onChange', index, tab); }}
-      onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
+      swipeable={false}
+      prerenderingSiblingsNumber={0}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff'}}>
         <Results />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
+
+      <div style={{marginTop: 10, background: '#fff'}}>
         <Trends />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
+
+      <div>
+        <Areas />
+      </div>
+
+      <div>
         <Locations />
       </div>
     </Tabs>
@@ -33,10 +41,11 @@ const TabExample = () => (
 
 class App extends Component {
   render() {
+    // let bannerUrl = 'https://ms.momocdn.com/02/12/549D/57D5.png'
     return (
       <div className={styles.App}>
-        <div className={styles['App-header']}>
-          <img src={require('./assets/banner.png')} className={styles.banner} /> 
+        <div>
+          <img src={require('./assets/banner.png')} alt={'banner'} className={styles.banner} />
         </div>
         <TabExample />
       </div>

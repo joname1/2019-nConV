@@ -1,0 +1,13 @@
+.results-item{
+    width: calc(100% - 31px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 16px;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 hsla(0,0%,85.9%,.5);
+    border-radius: 5px;
+}
+
+.am-list-extra{
+    color: red !important;
+}

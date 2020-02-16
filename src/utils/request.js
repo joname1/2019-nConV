@@ -1,5 +1,6 @@
 //全局路径
-const commonUrl = 'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services'
+// const commonUrl = 'https://naives.herokuapp.com'
+const commonUrl = 'https://resolute-april-80k2nlsf0n.glitch.me'
 //解析json
 function parseJSON(response) {
   return response.json()
@@ -13,26 +14,6 @@ function checkStatus(response) {
   error.response = response
   throw error
 }
-
-// export default function request(options = {}){
-//   const {url, data} = options
-//   options = {...options}
-//   options.mode = 'cors'
-//   if(data){
-//     options.data = JSON.stringify({
-//       data
-//     })
-//   }
-//   options.headers={
-//     'Content-Type':'application/json'
-//   }
-// console.log('svdf', options)
-// return fetch(commonUrl+url,options,{credentials: 'include'})
-// .then(res => {
-//     console.log('1s2', res)
-// })
-//     .catch(err=>({err}))
-// }
 
 export default function request(info) {
   let url = info.url, data = info.data
