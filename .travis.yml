@@ -5,8 +5,12 @@ node_js:
 install:
   - yarn
 
+cache:
+  directories:
+    - node_modules
+
 script:
-  - npm run build
+  - yarn build
 
 after_success:
   - cd ./build
