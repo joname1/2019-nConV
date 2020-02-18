@@ -117,10 +117,6 @@ class App extends Component {
           domenstic: CityInfo
         })
       })
-      
-      if(this.state.domenstic.length){
-        Toast.hide();
-      }
     })
   }
 
@@ -173,13 +169,17 @@ class App extends Component {
         }
       ]
     };
-    myChart.setOption(option, true)
+    myChart.setOption(option, true);
+
+    if(this.state.domenstic.length>0){
+      Toast.hide();
+    }
   }
 
   componentDidMount() {
-    Toast.loading('加载中')
-    this.getGlobalData();
+    Toast.loading('加载中', 0);
     this.getTrendData();
+    this.getGlobalData();
     this.getDomensticData();
   }
 

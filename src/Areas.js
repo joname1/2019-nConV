@@ -38,7 +38,7 @@ class App extends Component {
     }
 
     check(v) {
-        Toast.loading('加载中');
+        Toast.loading('加载中', 0);;
         this.setState({ pickerValue: v })
         let prov = provs.filter(item => item.code === v[0].substring(0, 2))
         let city = cities.filter(item => item.code === v[2].substring(0, 4));

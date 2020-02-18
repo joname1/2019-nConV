@@ -45,9 +45,6 @@ class App extends Component {
           mapData: CityInfo
         })
       })
-      if(this.state.mapData){
-        Toast.hide();
-      }
     })
   }
 
@@ -130,10 +127,14 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    this.getMaps()
+    this.getMaps();
+    
+    if(this.state.mapData.length>0){
+      Toast.hide();
+    }
   }
   componentDidMount() {
-    Toast.loading('加载中');
+    Toast.loading('加载中', 0);
     this.getLocationData();
   }
 

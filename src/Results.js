@@ -62,14 +62,12 @@ class App extends Component {
       this.setState({
         infos
       })
-
-      if(infos[2].count){
-        Toast.hide();
-      }
+      
+      Toast.hide();
     })
   }
   componentDidMount() {
-    Toast.loading('加载中');
+    Toast.loading('加载中', 0);;
     this.getUpdateTime();
     this.getResultsData();
   }
