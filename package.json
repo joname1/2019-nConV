@@ -1,6 +1,6 @@
 {
   "name": "create-react-app",
-  "version": "2.0.0",
+  "version": "9.0.0",
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.0.0",
@@ -23,6 +23,6 @@
     "babel-preset-env": "^1.7.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    "react-app-rewired": "2.1.5"
+    "react-app-rewired": "^1.2.9"
   }
 }
