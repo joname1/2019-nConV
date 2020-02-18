@@ -1,16 +1,15 @@
 language: node_js
-node_js:
-  - "9"
+node_js: stable
 
 install:
-  - yarn
+  - npm install
 
 cache:
   directories:
     - node_modules
 
 script:
-  - yarn build
+  - npm run build
 
 after_success:
   - cd ./build
