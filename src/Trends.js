@@ -27,14 +27,14 @@ class App extends Component {
   getTrendData() {
     let now = Math.round(new Date().getTime());
     request({
-      url: '/cases_time/FeatureServer/0/query',
+      url: '/cases_time_v3/FeatureServer/0/query',
       method: 'get',
       data: {
         'f': 'json',
-        'where': "Report_Date<" + "'" + dateFormat(now, "yyyy-MM-dd hh:mm:ss") + "'",
+        'where': '1=1',
         'returnGeometry': false,
         'outFields': '*',
-        'orderByFields': 'Report_Date%20asc'
+        'orderByFields': 'Report_Date_String%20asc'
       }
     }).then((res) => {
       let dateArry = []
@@ -69,11 +69,11 @@ class App extends Component {
       let Arry = []
       res.features.map((item) => {
         let dad = area.countryList.filter(data => {
-          return data.eng === item.attributes.Country_Region
+          return Object.values(data)[0] === item.attributes.Country_Region
         })
 
         Arry.push({
-          name: dad[0].name,
+          name: Object.keys(dad[0]),
           value: item.attributes.Confirmed
         })
 

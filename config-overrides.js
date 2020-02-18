@@ -12,6 +12,8 @@ module.exports = function override(config, env) {
     style: true, // use less for customized theme
   }], config);
 
+  config.devtool = false;
+
   // customize theme
   config.module.rules[1].oneOf.unshift(
     {
