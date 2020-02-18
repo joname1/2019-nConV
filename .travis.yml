@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "9"
+  - "8"
 
 install:
   - npm install
@@ -22,4 +22,4 @@ branches:
     - dev
 env:
   global:
-    - GH_REF: github.com/joname1/2019-nConV
+    - GH_REF: github.com/joname1/2019-nConV.git
