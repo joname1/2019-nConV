@@ -90,7 +90,7 @@ function normalize(data) {
         } else if (flag === 0) {
             dataInfo = {};
             dataInfo.title = list[i]["Country_Region"];
-            dataInfo.Province = new Array();
+            dataInfo.Province = [];
             dataInfo.Province.push({
                 name: list[i].Province_State || list[i].Country_Region,
                 value: list[i].Confirmed,

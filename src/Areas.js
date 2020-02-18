@@ -55,11 +55,13 @@ class App extends Component {
             }
         }).then((res) => {
             let grandpa = Object.values(res.summary)
+            // eslint-disable-next-line
             grandpa.map((item) => {
                 this.setState({
                     name: Object.keys(item)
                 })
                 let dad = Object.values(item);
+                // eslint-disable-next-line
                 dad.map((sub) => {
                     this.setState({
                         total: sub.cnt_sum_certain
@@ -79,6 +81,7 @@ class App extends Component {
             }
         }).then((res) => {
             let grandpa = Object.values(res.community)
+            // eslint-disable-next-line
             grandpa.map((item) => {
                 if (Object.values(item).length === 0) {
                     this.setState({
@@ -86,6 +89,7 @@ class App extends Component {
                     })
                 }
                 let dad = Object.values(item);
+                // eslint-disable-next-line
                 dad.map((sub) => {
                     if (Object.values(sub).length === 0) {
                         this.setState({
@@ -93,6 +97,7 @@ class App extends Component {
                         })
                     }
                     let son = Object.values(sub)
+                    // eslint-disable-next-line
                     son.map((nx) => {
                         this.setState({
                             info: nx

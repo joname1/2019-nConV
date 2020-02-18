@@ -27,11 +27,13 @@ class App extends Component {
     }).then(res => {
       let Arry = [];
       let CityInfo = [];
+      // eslint-disable-next-line
       res.features.map(item => {
         Arry.push(item.attributes);
       });
       
       let dad = normalize(Arry)[0].Province;
+      // eslint-disable-next-line
       dad.map(res => {
         let loc = area.areaList.filter(item => item.eng === res.name)
         CityInfo.push({
@@ -60,7 +62,8 @@ class App extends Component {
       tooltip: {
         triggerOn: "click",
         formatter: function (e, t, n) {
-          return e.value? e.name + "<br />" + e.seriesName + "：" + e.value + '例' : e.name + "<br />" + '暂无数据'
+          // eslint-disable-next-line
+          return e.value? e.name + "<br />" + e.seriesName + "：" + e.value + '例' : e.name + "<br />" + '暂无数据';
         }
       },
       visualMap: {

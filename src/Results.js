@@ -47,6 +47,7 @@ class App extends Component {
       let confirmedArry = [];
       let deathsArry = [];
       let recoveredArry = [];
+      // eslint-disable-next-line
       res.features.map((item) => {
         confirmedArry.push(item.attributes.Confirmed);
         recoveredArry.push(item.attributes.Recovered);

@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   getTrendData() {
-    let now = Math.round(new Date().getTime());
     request({
       url: '/cases_time_v3/FeatureServer/0/query',
       method: 'get',
@@ -40,6 +39,7 @@ class App extends Component {
       let dateArry = []
       let chinaArry = []
       let otherArry = []
+      // eslint-disable-next-line
       res.features.map((item) => {
         dateArry.push(dateFormat(item.attributes.Report_Date, "MM月dd日"));
         chinaArry.push(item.attributes.Mainland_China);
@@ -67,6 +67,7 @@ class App extends Component {
       }
     }).then((res) => {
       let Arry = []
+      // eslint-disable-next-line
       res.features.map((item) => {
         let dad = area.countryList.filter(data => {
           return Object.values(data)[0] === item.attributes.Country_Region
@@ -98,11 +99,13 @@ class App extends Component {
     }).then(res => {
       let Arry = [];
       let CityInfo = [];
+      // eslint-disable-next-line
       res.features.map(item => {
         Arry.push(item.attributes);
       });
       
       let dad = normalize(Arry)[0].Province;
+      // eslint-disable-next-line
       dad.map(res => {
         let loc = area.areaList.filter(item => item.eng === res.name)
         CityInfo.push({
