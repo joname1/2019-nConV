@@ -15,20 +15,12 @@ class App extends Component {
   }
   getLocationData() {
     request({
-      url: '/ncov_cases/FeatureServer/1/query',
-      method: 'get',
-      data: {
-        'f': 'json',
-        'where': '1=1',
-        'returnGeometry': false,
-        'outFields': '*',
-        'orderByFields': 'Confirmed%20desc%2CCountry_Region%20asc%2CProvince_State%20asc'
-      }
+      url: '/api/v2/ncov_cases/2'
     }).then(res => {
       let Arry = [];
       let CityInfo = [];
       // eslint-disable-next-line
-      res.features.map(item => {
+      res.data.map(item => {
         Arry.push(item.attributes);
       });
       

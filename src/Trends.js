@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { dateFormat, NumberComma, normalize } from './utils/util';
+import { NumberComma, normalize } from './utils/util';
 import { Toast, SegmentedControl } from 'antd-mobile';
 import styles from './Trends.css';
 import echarts from 'echarts';
@@ -26,49 +26,23 @@ class App extends Component {
 
   getTrendData() {
     request({
-      url: '/cases_time_v3/FeatureServer/0/query',
-      method: 'get',
-      data: {
-        'f': 'json',
-        'where': '1=1',
-        'returnGeometry': false,
-        'outFields': '*',
-        'orderByFields': 'Report_Date_String%20asc'
-      }
+      url: '/api/v2/ncov_cases/3',
     }).then((res) => {
-      let dateArry = []
-      let chinaArry = []
-      let otherArry = []
-      // eslint-disable-next-line
-      res.features.map((item) => {
-        dateArry.push(dateFormat(item.attributes.Report_Date, "MM月dd日"));
-        chinaArry.push(item.attributes.Mainland_China);
-        otherArry.push(item.attributes.Other_Locations);
-
         this.setState({
-          date: dateArry,
-          china: chinaArry,
-          other: otherArry
+          date: res.data.time,
+          china: res.data.china,
+          other: res.data.other
         })
-      });
     })
   }
 
   getGlobalData() {
     request({
-      url: '/ncov_cases/FeatureServer/2/query',
-      method: 'get',
-      data: {
-        'f': 'json',
-        'where': '1=1',
-        'returnGeometry': false,
-        'outFields': '*',
-        'orderByFields': 'Confirmed%20desc'
-      }
+      url: '/api/v2/ncov_cases/1'
     }).then((res) => {
       let Arry = []
       // eslint-disable-next-line
-      res.features.map((item) => {
+      res.data.map((item) => {
         let dad = area.countryList.filter(data => {
           return Object.values(data)[0] === item.attributes.Country_Region
         })
@@ -87,20 +61,12 @@ class App extends Component {
   
   getDomensticData() {
     request({
-      url: '/ncov_cases/FeatureServer/1/query',
-      method: 'get',
-      data: {
-        'f': 'json',
-        'where': '1=1',
-        'returnGeometry': false,
-        'outFields': '*',
-        'orderByFields': 'Confirmed%20desc%2CCountry_Region%20asc%2CProvince_State%20asc'
-      }
+      url: '/api/v2/ncov_cases/2',
     }).then(res => {
       let Arry = [];
       let CityInfo = [];
       // eslint-disable-next-line
-      res.features.map(item => {
+      res.data.map(item => {
         Arry.push(item.attributes);
       });
       
@@ -142,7 +108,7 @@ class App extends Component {
         x: 'right'
       },
       grid: {
-        left: '5%',
+        left: '3%',
         right: '5%',
         top: '20%',
         bottom: '1%',

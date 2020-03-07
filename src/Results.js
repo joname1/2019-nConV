@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Toast } from 'antd-mobile';
-import { dateFormat, NumberComma, calcSum } from "./utils/util";
+import { NumberComma } from "./utils/util";
 import request from './utils/request'
 import styles from './Results.css';
 
@@ -18,57 +18,25 @@ class App extends Component {
     };
   }
 
-  getUpdateTime() {
-    request({
-      url: '/cases_time_v2/FeatureServer/0',
-      method: 'get',
-      data: {
-        'f': 'json'
-      }
-    }).then((res) => {
-      this.setState({
-        updateTime: dateFormat(res.editingInfo.lastEditDate, "yyyy-MM-dd hh:mm:ss")
-      })
-    })
-  }
-
   getResultsData() {
     request({
-      url: '/ncov_cases/FeatureServer/1/query',
-      method: 'get',
-      data: {
-        'f': 'json',
-        'where': '1=1',
-        'returnGeometry': false,
-        'outFields': '*',
-        'orderByFields': 'Confirmed%20desc%2CCountry_Region%20asc%2CProvince_State%20asc'
-      }
+      url: '/api/v2/ncov_cases/0'
     }).then((res) => {
-      let confirmedArry = [];
-      let deathsArry = [];
-      let recoveredArry = [];
-      // eslint-disable-next-line
-      res.features.map((item) => {
-        confirmedArry.push(item.attributes.Confirmed);
-        recoveredArry.push(item.attributes.Recovered);
-        deathsArry.push(item.attributes.Deaths);
-      })
-
       const infos = this.state.info;
-      infos[0].count = calcSum(confirmedArry)
-      infos[1].count = calcSum(deathsArry)
-      infos[2].count = calcSum(recoveredArry)
+      infos[0].count = res.confirmed
+      infos[1].count = res.deaths
+      infos[2].count = res.recovered
 
       this.setState({
-        infos
+        infos,
+        updateTime: res.update
       })
       
       Toast.hide();
     })
   }
   componentDidMount() {
-    Toast.loading('加载中', 0);;
-    this.getUpdateTime();
+    Toast.loading('加载中', 0);
     this.getResultsData();
   }
 
