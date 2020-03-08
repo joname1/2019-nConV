@@ -35,6 +35,7 @@ class App extends Component {
       Toast.hide();
     })
   }
+
   componentDidMount() {
     Toast.loading('加载中', 0);
     this.getResultsData();
