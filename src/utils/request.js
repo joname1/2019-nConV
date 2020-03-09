@@ -1,6 +1,6 @@
 //全局路径
 // const commonUrl = 'https://naives.herokuapp.com'
-const commonUrl = 'https://naives.glitch.me'
+const commonUrl = 'https://wvvw.now.sh'
 //解析json
 function parseJSON(response) {
   return response.json()
