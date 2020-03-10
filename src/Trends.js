@@ -9,7 +9,7 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
 import 'echarts/lib/component/markPoint';
 import request from './utils/request';
-import area from './utils/area'
+import area from './utils/constant'
 
 class App extends Component {
   constructor(prpos) {
@@ -46,7 +46,7 @@ class App extends Component {
         let dad = area.countryList.filter(data => {
           return Object.values(data)[0] === item.attributes.Country_Region
         })
-
+        console.log()
         Arry.push({
           name: Object.keys(dad[0]),
           value: item.attributes.Confirmed

@@ -15,6 +15,7 @@ class App extends Component {
   getLocationData() {
     const scene = new Scene({
       id: 'map',
+      logoVisible: false,
       map: new GaodeMap({
         pitch: 0,
         style: 'dark',

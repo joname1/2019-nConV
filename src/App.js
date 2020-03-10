@@ -3,12 +3,14 @@ import { Tabs, Badge } from 'antd-mobile';
 import Results from './Results';
 import Trends from './Trends';
 import Areas from './Areas';
+import Record from './Record';
 import Locations from './Locations';
 import styles from './App.css';
 
 const tabs = [
   { title: <Badge>综合</Badge> },
   { title: <Badge>趋势</Badge> },
+  { title: <Badge>记疫</Badge> },
   { title: <Badge>查询</Badge> },
   { title: <Badge>地图</Badge> },
 ];
@@ -20,12 +22,17 @@ const TabExample = () => (
       swipeable={false}
       prerenderingSiblingsNumber={0}
     >
+
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff'}}>
         <Results />
       </div>
 
       <div style={{marginTop: 10, background: '#fff'}}>
         <Trends />
+      </div>
+
+      <div>
+        <Record />
       </div>
 
       <div>
