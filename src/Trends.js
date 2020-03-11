@@ -46,7 +46,6 @@ class App extends Component {
         let dad = area.countryList.filter(data => {
           return Object.values(data)[0] === item.attributes.Country_Region
         })
-        console.log()
         Arry.push({
           name: Object.keys(dad[0]),
           value: item.attributes.Confirmed

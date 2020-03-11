@@ -69,10 +69,14 @@ class App extends Component {
                         request({
                             url: '/api/v2/ncov_cases/timeline/page=' + i,
                         }).then((res) => {
-                            this.setState({
-                                height: hei,
-                                infos: res.data.concat(res.data)
-                            })
+                            if(res.data.length===0) {
+                                Toast.info('暂无更多资讯', 2);
+                            }else {
+                                this.setState({
+                                    height: hei,
+                                    infos: res.data.concat(res.data)
+                                })
+                            }
                             if (this.state.infos.length > 0) {
                                 this.setState({ refreshing: false })
                             }
