@@ -43,11 +43,12 @@ class App extends Component {
       let Arry = []
       // eslint-disable-next-line
       res.data.map((item) => {
-        let dad = area.countryList.filter(data => {
-          return Object.values(data)[0] === item.attributes.Country_Region
-        })
+        // let dad = area.countryList.filter(data => {
+        //   return Object.values(data)[0] === item.attributes.Country_Region
+        // })
         Arry.push({
-          name: Object.keys(dad[0]),
+          // name: Object.keys(dad[0]),
+          name: item.attributes.Country_Region,
           value: item.attributes.Confirmed
         })
 

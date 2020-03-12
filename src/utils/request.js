@@ -1,6 +1,7 @@
 //全局路径
 // const commonUrl = 'https://naives.glitch.me'
-const commonUrl = 'https://wvvw-3nwdsllu8.now.sh'
+// const commonUrl = 'https://wvvw-3nwdsllu8.now.sh'
+const commonUrl = 'http://119.28.56.190:3000'
 
 //解析json
 function parseJSON(response) {

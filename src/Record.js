@@ -9,7 +9,7 @@ import styles from './Record.css';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.pageNum = 2,
+        this.pageNum = 1,
         this.ptr,
         this.state = {
             refreshing: false,
@@ -20,7 +20,7 @@ class App extends Component {
 
     getData(hei) {
         request({
-            url: '/api/v2/ncov_cases/timeline/page=1',
+            url: '/api/v2/ncov_cases/timeline/page=' + this.pageNum,
         }).then((res) => {
             this.setState({
                 height: hei,
@@ -65,26 +65,22 @@ class App extends Component {
                     onRefresh={() => {
                         this.setState({ refreshing: true })
                         const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-                        let i = this.pageNum ++;
+                        let num = ++this.pageNum;
                         request({
-                            url: '/api/v2/ncov_cases/timeline/page=' + i,
+                            url: '/api/v2/ncov_cases/timeline/page=' + num,
                         }).then((res) => {
                             if(res.data.length===0) {
                                 Toast.info('暂无更多资讯', 2);
                             }else {
                                 this.setState({
                                     height: hei,
-                                    infos: res.data.concat(res.data)
+                                    infos: this.state.infos.concat(res.data)
                                 })
                             }
                             if (this.state.infos.length > 0) {
                                 this.setState({ refreshing: false })
                             }
                         })
-                        // this.setState({ refreshing: true });
-                        // setTimeout(() => {
-                        //   this.setState({ refreshing: false });
-                        // }, 1000);
                     }}
                 >
                     <div className={styles['custom-bg-white']}>
