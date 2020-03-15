@@ -13,6 +13,7 @@ class App extends Component {
         this.ptr,
         this.state = {
             refreshing: false,
+            down: false,
             height: document.documentElement.clientHeight,
             infos: []
         }

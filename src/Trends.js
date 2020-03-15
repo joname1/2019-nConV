@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NumberComma, normalize } from './utils/util';
-import { Toast, SegmentedControl } from 'antd-mobile';
+import { Toast, WhiteSpace } from 'antd-mobile';
 import styles from './Trends.css';
 import echarts from 'echarts';
 import 'echarts/lib/chart/line';  //折线图是line,饼图改为pie,柱形图改为bar
@@ -26,84 +26,33 @@ class App extends Component {
 
   getTrendData() {
     request({
-      url: '/api/v2/ncov_cases/3',
+      url: '/api/v2/ncov_cases/1',
     }).then((res) => {
         this.setState({
           date: res.data.time,
           china: res.data.china,
-          other: res.data.other
-        })
-    })
-  }
-
-  getGlobalData() {
-    request({
-      url: '/api/v2/ncov_cases/1'
-    }).then((res) => {
-      let Arry = []
-      // eslint-disable-next-line
-      res.data.map((item) => {
-        // let dad = area.countryList.filter(data => {
-        //   return Object.values(data)[0] === item.attributes.Country_Region
-        // })
-        Arry.push({
-          // name: Object.keys(dad[0]),
-          name: item.attributes.Country_Region,
-          value: item.attributes.Confirmed
+          other: res.data.other,
+          totalC: res.data.total_confirmed,
+          totalR: res.data.total_recovered
         })
 
-        this.setState({
-          global: Arry
-        })
-      })
-    })
-  }
-  
-  getDomensticData() {
-    request({
-      url: '/api/v2/ncov_cases/2',
-    }).then(res => {
-      let Arry = [];
-      let CityInfo = [];
-      // eslint-disable-next-line
-      res.data.map(item => {
-        Arry.push(item.attributes);
-      });
-      
-      let dad = normalize(Arry)[0].Province;
-      // eslint-disable-next-line
-      dad.map(res => {
-        let loc = area.areaList.filter(item => item.eng === res.name)
-        CityInfo.push({
-          name: loc[0].name,
-          value: res.value
-        })
-
-        this.setState({
-          domenstic: CityInfo
-        })
-      })
-    })
-  }
-
-  setShow = (e) => {
-    this.setState({
-      show: e.nativeEvent.selectedSegmentIndex
+        Toast.hide()
     })
   }
 
   componentDidUpdate() {
-    let myChart = echarts.init(document.getElementById('main'));
-    let option = {
+    let myChart1 = echarts.init(document.getElementById('main1'));
+    let myChart2 = echarts.init(document.getElementById('main2'));
+    let option1 = {
       title: {
-        text: '全球确诊人数',
+        text: '国内外确诊人数',
         left: 'center'
       },
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: ['中国', '其他'],
+        data: ['中国', '海外'],
         orient: 'vertical',
         x: 'right'
       },
@@ -129,63 +78,69 @@ class App extends Component {
           data: this.state.china
         },
         {
-          name: '其他',
+          name: '海外',
           type: 'line',
           data: this.state.other
         }
       ]
     };
-    myChart.setOption(option, true);
-
-    if(this.state.domenstic.length>0){
-      Toast.hide();
-    }
+    let option2 = {
+      title: {
+        text: '全球总确诊/治愈人数',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['确诊', '治愈'],
+        orient: 'vertical',
+        x: 'right'
+      },
+      grid: {
+        left: '3%',
+        right: '5%',
+        top: '20%',
+        bottom: '1%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: this.state.date
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '确诊',
+          type: 'line',
+          data: this.state.totalC
+        },
+        {
+          name: '治愈',
+          type: 'line',
+          data: this.state.totalR
+        }
+      ]
+    };
+    myChart1.setOption(option1, true);
+    myChart2.setOption(option2, true);
   }
 
   componentDidMount() {
     Toast.loading('加载中', 0);
     this.getTrendData();
-    this.getGlobalData();
-    this.getDomensticData();
   }
 
   render() {
     const data = this.state;
     return (
       <div className={styles.App}>
-        <div id="main" style={{ height: 250 }}></div>
-        <div>
-          <div className={styles['content-title']}>
-            <span style={{fontSize: 20, marginTop: 10}}>已确诊的国家/地区</span>
-          </div>
-
-          <div style={{ width: '90%', margin: '0 auto', paddingBottom: 10}}>
-            <SegmentedControl
-              values={['全球', '国内']}
-              onChange={this.setShow}
-            />
-          </div>
-
-          {data.show === 0 ? (
-            <div className={styles['content-scroll']}>
-              {data.global.map((item, index) => {
-                return (
-                  <h3 key={index}>{item.name} <span style={{ color: 'red' }}>{NumberComma(item.value)}</span>例</h3>
-                )
-              })}
-            </div>
-          ) : (
-            <div className={styles['content-scroll']}>
-            {data.domenstic.map((item, index) => {
-              return (
-                <h3 key={index}>{item.name} <span style={{ color: 'red' }}>{NumberComma(item.value)}</span>例</h3>
-              )
-            })}
-          </div>
-            )
-
-          }
-        </div>
+        <div id="main1" style={{ height: 250 }}></div>
+        <div style={{marginTop: 50}}></div>
+        <div id="main2" style={{ height: 250 }}></div>
       </div>
     );
   }

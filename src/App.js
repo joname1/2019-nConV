@@ -23,9 +23,11 @@ const TabExample = () => (
       prerenderingSiblingsNumber={0}
     >
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff'}}>
+      {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff'}}>
         <Results />
-      </div>
+      </div> */}
+
+      <Results />
 
       <div style={{marginTop: 10, background: '#fff'}}>
         <Trends />

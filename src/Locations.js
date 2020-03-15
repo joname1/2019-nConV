@@ -26,7 +26,7 @@ class App extends Component {
     });
 
     request({
-      url: '/api/v2/ncov_cases/4'
+      url: '/api/v2/ncov_cases/2'
     }).then(data =>  {
         data.features = data.features.filter(item => {
           return item.properties.confirmed > 0;
