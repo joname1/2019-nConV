@@ -152,7 +152,7 @@ class App extends Component {
                     </Picker>
                 </List>
 
-                {!datas.info.length ? (<div style={{ marginTop: 50 }}>
+                {!datas.info.length ? (<div style={{ marginTop: 50, textAlign: 'center' }}>
                     <span>您所在的区域暂未公布或暂未收录具体的疫情信息</span>
                 </div>)
                     :
