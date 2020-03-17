@@ -160,7 +160,7 @@ class App extends Component {
                         <Accordion.Panel>
                             <List className="my-list" renderHeader={() => {
                                 return (
-                                    <div>
+                                    <div style={{ textAlign:'center' }}>
                                         <p style={{ margin: 0 }}>{datas.name} 总共确诊 <span style={{ color: 'red', fontWeight: 'bold' }}>{datas.total}</span> 人</p>
                                         <p style={{ margin: 0 }}>本区 总共发现 <span style={{ color: 'red', fontWeight: 'bold' }}>{datas.info.length}</span> 个地点</p>
                                     </div>

@@ -32,6 +32,10 @@ class App extends Component {
             }
         })
     }
+
+    show(item) {
+        console.log(item)
+    }
     componentDidMount() {
         const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
         Toast.loading('加载中', 0);
@@ -91,10 +95,10 @@ class App extends Component {
                                     return (
                                         <div className={styles['timeline-post']} key={index}>
                                             <div className={`${styles['timeline-meta']} ${styles['for-large-icons']}}`}>
-                                                <div className={styles['meta-details']}>{dateFormat(new Date(item.title).getTime(), 'yyyy年')}</div>
+                                                <div className={styles['meta-details']}>{dateFormat(new Date(item.title.replace(/-/g, '/')).getTime(), 'yyyy年')}</div>
                                             </div>
                                             <div className={`${styles['timeline-icon']} ${styles['icon-larger']} ${styles['iconbg-black']} ${styles['icon-color-white']}`}>
-                                                <div className={styles['icon-placeholder']}>{dateFormat(new Date(item.title).getTime(), 'M月')}<span>{dateFormat(new Date(item.title).getTime(), 'dd')} </span></div>
+                                                <div className={styles['icon-placeholder']}>{dateFormat(new Date(item.title.replace(/-/g, '/')), 'M月')}<span>{dateFormat(new Date(item.title.replace(/-/g, '/')).getTime(), 'dd')} </span></div>
                                                 <div className={styles['timeline-bar']}></div>
                                             </div>
                                             {item.info.map((sub, index) => {
@@ -109,6 +113,7 @@ class App extends Component {
                                                         style={{
                                                             background: (dad[0].type === dad[0].type) ? dad[0].color : ''
                                                         }}
+                                                        // onClick={this.show.bind(this, sub)}
                                                     >
                                                         <div className={styles['icon-arrow']}
                                                             style={{

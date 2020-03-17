@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { NumberComma, normalize } from './utils/util';
-import { Toast, WhiteSpace } from 'antd-mobile';
+import { Toast } from 'antd-mobile';
 import styles from './Trends.css';
 import echarts from 'echarts';
 import 'echarts/lib/chart/line';  //折线图是line,饼图改为pie,柱形图改为bar
@@ -9,7 +8,6 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
 import 'echarts/lib/component/markPoint';
 import request from './utils/request';
-import area from './utils/constant'
 
 class App extends Component {
   constructor(prpos) {
@@ -45,19 +43,20 @@ class App extends Component {
     let myChart2 = echarts.init(document.getElementById('main2'));
     let option1 = {
       title: {
-        text: '国内外确诊人数',
+        text: '国内(外)确诊人数',
         left: 'center'
       },
       tooltip: {
         trigger: 'axis'
       },
+      color: ['#e60000', '#03a9f4'],
       legend: {
-        data: ['中国', '海外'],
+        data: ['国内', '国外'],
         orient: 'vertical',
         x: 'right'
       },
       grid: {
-        left: '3%',
+        left: '1%',
         right: '5%',
         top: '20%',
         bottom: '1%',
@@ -73,22 +72,25 @@ class App extends Component {
       },
       series: [
         {
-          name: '中国',
+          name: '国内',
           type: 'line',
-          data: this.state.china
+          data: this.state.china,
+          smooth: true
         },
         {
-          name: '海外',
+          name: '国外',
           type: 'line',
-          data: this.state.other
+          data: this.state.other,
+          smooth: true
         }
       ]
     };
     let option2 = {
       title: {
-        text: '全球总确诊/治愈人数',
+        text: '全球总确诊(治愈)人数',
         left: 'center'
       },
+      color: ['#e60000', '#7bb974'],
       tooltip: {
         trigger: 'axis'
       },
@@ -98,7 +100,7 @@ class App extends Component {
         x: 'right'
       },
       grid: {
-        left: '3%',
+        left: '1%',
         right: '5%',
         top: '20%',
         bottom: '1%',
@@ -116,12 +118,14 @@ class App extends Component {
         {
           name: '确诊',
           type: 'line',
-          data: this.state.totalC
+          data: this.state.totalC,
+          smooth: true
         },
         {
           name: '治愈',
           type: 'line',
-          data: this.state.totalR
+          data: this.state.totalR,
+          smooth: true
         }
       ]
     };

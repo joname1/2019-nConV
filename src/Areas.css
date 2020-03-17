@@ -11,3 +11,12 @@
 .am-list-extra{
     color: red !important;
 }
+
+.content-scroll {
+    display: block;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    overscroll-behavior: contain;
+    -ms-scroll-chaining: contain;
+}
