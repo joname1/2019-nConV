@@ -1,3 +1,7 @@
+.trends{
+    display:inline-block;
+    text-align: center;
+}
 .content-title {
     display: flex;
     margin: 10px;

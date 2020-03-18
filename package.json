@@ -3,6 +3,7 @@
   "version": "9.0.0",
   "private": true,
   "dependencies": {
+    "@antv/f2": "^3.6.0",
     "@antv/l7": "^2.0.36",
     "@antv/l7-maps": "^2.0.36",
     "antd-mobile": "^2.0.0",
@@ -10,7 +11,8 @@
     "echarts": "^4.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "homepage": "./",
   "scripts": {

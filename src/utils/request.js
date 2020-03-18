@@ -1,5 +1,6 @@
 //全局路径
-const commonUrl = 'http://119.28.56.190:3000'
+// const commonUrl = 'https://7xxjzz1aj6htm.cfc-execute.gz.baidubce.com'
+const commonUrl = 'https://7xxjzz1aj6htm.cfc-execute.gz.baidubce.com'
 
 //解析json
 function parseJSON(response) {
