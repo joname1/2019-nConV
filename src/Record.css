@@ -46,6 +46,13 @@ ul li {
 }
 
 /* timeline */
+.icon-arrow{
+    position: absolute;
+    border: 10px solid #ffffff00;
+	border-right: 10px solid #fff;
+    left: -18px;
+    top: 13px;
+}
 .custom-bg {
     background:#EAF0F2
 }
@@ -305,13 +312,6 @@ ul li {
 .jazz-timeline .timeline-post .icon-color-black {
     color:#000
 }
-.icon-arrow{
-    position: absolute;
-    border: 10px solid #ffffff00;
-	border-right: 10px solid #fff;
-    left: -18px;
-    top: 10px;
-}
 .jazz-timeline .timeline-post .timeline-content {
     background:#fff;
     position:relative;
@@ -330,8 +330,7 @@ ul li {
     padding:0
 }
 .jazz-timeline .timeline-post .timeline-content p {
-    margin:15px 0 10px;
-    /* line-height:25px; */
+    margin:5px 0 5px;
     font-size:16px;
     font-weight:400;
     text-align: left;

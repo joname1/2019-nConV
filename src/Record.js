@@ -44,9 +44,9 @@ class App extends Component {
 
     render() {
         const data = this.state;
-        const h = document.documentElement.clientHeight - 230;
+        const h = document.documentElement.clientHeight - 210;
         return (
-            <div className={styles.App}>
+            <div id="time">
                 <div>
                     <div className={styles.navs}>
                         {source.sourceType.map((item, index) => {

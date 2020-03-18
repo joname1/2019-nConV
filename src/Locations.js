@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   render() {
-    const h = document.documentElement.clientHeight - 186;
+    const h = document.documentElement.clientHeight - 180;
     return (
       <div id="map" style={{minHeight: h, touchAction: 'none', position: 'relative'}} />
     );

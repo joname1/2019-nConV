@@ -16,11 +16,12 @@ const tabs = [
 ];
 
 const TabExample = () => (
-  <div style={{paddingBottom: 10}}>
+  <div>
     <Tabs tabs={tabs}
       initialPage={0}
       swipeable={false}
       prerenderingSiblingsNumber={0}
+      style={{paddingBottom: 10}}
     >
 
       <Results />
@@ -48,7 +49,7 @@ class App extends Component {
   render() {
     // let bannerUrl = 'https://ms.momocdn.com/02/12/549D/57D5.png'
     return (
-      <div className={styles.App}>
+      <div id="header">
         <div>
           <img src={require('./assets/banner.png')} alt={'banner'} className={styles.banner} />
         </div>
