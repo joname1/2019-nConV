@@ -1,5 +1,4 @@
 //全局路径
-// const commonUrl = 'https://7xxjzz1aj6htm.cfc-execute.gz.baidubce.com'
 const commonUrl = 'https://wvvw.cdn1.now.sh'
 
 //解析json
