@@ -39,10 +39,39 @@ ul li {
     overflow: auto;
     overscroll-behavior: contain;
     -ms-scroll-chaining: contain;
-
+    position: relative;
 }
 .green{
     color: #24ae86;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+    filter: alpha(opacity=60);  
+    background-color: #32363b; 
+    z-index: 11;
+}
+.modal-content {
+    position: absolute;
+    color: #F0F2F4;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    top: 10%;
+}
+
+.modal-close{
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform:translate(-50%,-50%);
 }
 
 /* timeline */

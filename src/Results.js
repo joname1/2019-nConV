@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Toast, Icon, WhiteSpace } from 'antd-mobile';
-import { NumberComma, dateFormat } from "./utils/util";
+import { NumberComma } from "./utils/util";
 import request from './utils/request'
 import styles from './Results.css';
 
@@ -25,7 +25,10 @@ class App extends Component {
         sucess: true
       })
       Toast.hide();
-    })
+    }).catch(() => {
+      Toast.info('请刷新页面', 2);
+      Toast.hide();
+  })
   }
   showMoreA() {
     this.setState({
@@ -36,6 +39,9 @@ class App extends Component {
     this.setState({
       showB: !this.state.showB
     })
+  }
+  showChild(data) {
+    console.log(data)
   }
   componentWillMount() {
     Toast.loading('加载中', 0);
@@ -52,12 +58,12 @@ class App extends Component {
         <div className={styles['ncov']}>
           <div className={styles['ncov-header']}>
             <div className={styles['ncov-header-title']}>全国实时疫情</div>
-            <div style={{ fontSize: 11, color: '#00000066' }}>{data.sucess ? infos.domestic.info.time : 0}</div>
+            <div style={{ fontSize: 11, color: '#00000066' }}>{data.sucess ? infos.domestic.info.time : ''}</div>
           </div>
 
           <div className={styles['ncov-item']}>
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>确诊</span>
+              <span style={{ fontSize: 15 }}>确诊</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#e60000' }}>{data.sucess ? NumberComma(infos.domestic.info.t_sure_cnt) : 0}</span>
               <span style={{ background: '#d93d3d0f' }} className={styles['ncov-item-content-add']}>
                 较昨日
@@ -66,7 +72,7 @@ class App extends Component {
             </div>
 
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>治愈</span>
+              <span style={{ fontSize: 15 }}>治愈</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#7bb974' }}>{data.sucess ? NumberComma(infos.domestic.info.t_cure_cnt) : 0}</span>
               <span style={{ background: '#4175050f' }} className={styles['ncov-item-content-add']}>
                 较昨日
@@ -75,7 +81,7 @@ class App extends Component {
             </div>
 
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>死亡</span>
+              <span style={{ fontSize: 15 }}>死亡</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#999999' }}>{data.sucess ? NumberComma(infos.domestic.info.t_die_cnt) : 0}</span>
               <span style={{ background: '#f4f4f4cc' }} className={styles['ncov-item-content-add']}>
                 较昨日
@@ -127,12 +133,12 @@ class App extends Component {
         <div className={styles['ncov']}>
           <div className={styles['ncov-header']}>
             <div className={styles['ncov-header-title']}>海外实时疫情</div>
-            <div style={{ fontSize: 11, color: '#00000066' }}>数据统计截止{dateFormat(new Date().getTime(), 'MM-dd hh:mm')}</div>
+            <div style={{ fontSize: 11, color: '#00000066' }}>{data.sucess ? infos.domestic.info.time : ''}</div>
           </div>
 
           <div className={styles['ncov-item']}>
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>确诊</span>
+              <span style={{ fontSize: 15 }}>确诊</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#e60000' }}>{data.sucess ? NumberComma(infos.foreign.info.sure_cnt) : 0}</span>
               <span style={{ background: '#d93d3d0f' }} className={styles['ncov-item-content-add']}>
                 较昨日
@@ -141,7 +147,7 @@ class App extends Component {
             </div>
 
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>治愈</span>
+              <span style={{ fontSize: 15 }}>治愈</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#7bb974' }}>{data.sucess ? NumberComma(infos.foreign.info.cure_cnt) : 0}</span>
               {/* <span style={{ fontSize: 11 }}>
                 较昨日
@@ -150,7 +156,7 @@ class App extends Component {
             </div>
 
             <div className={styles['ncov-item-content']}>
-              <span style={{ fontSize: 13 }}>死亡</span>
+              <span style={{ fontSize: 15 }}>死亡</span>
               <span className={styles['ncov-item-content-num']} style={{ color: '#999999' }}>{data.sucess ? NumberComma(infos.foreign.info.die_cnt) : 0}</span>
               {/* <span style={{ fontSize: 11 }}>
                 较昨日

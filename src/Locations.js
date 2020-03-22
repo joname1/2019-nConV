@@ -46,7 +46,10 @@ class App extends Component {
         scene.addLayer(pointLayer);
 
         Toast.hide();
-      });
+      }).catch(() => {
+        Toast.info('请刷新页面', 2);
+        Toast.hide();
+    })
   }
 
   componentDidMount() {

@@ -9,6 +9,7 @@ import styles from './Record.css';
 class App extends Component {
     constructor(props) {
         super(props);
+        // eslint-disable-next-line
         this.pageNum = 1,
         this.ptr,
         this.state = {
@@ -30,12 +31,12 @@ class App extends Component {
             if (this.state.infos.length > 0) {
                 Toast.hide();
             }
+        }).catch(() => {
+            Toast.info('请刷新页面', 2);
+            Toast.hide();
         })
     }
 
-    show(item) {
-        console.log(item)
-    }
     componentDidMount() {
         const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
         Toast.loading('加载中', 0);
@@ -111,13 +112,12 @@ class App extends Component {
                                                         key={index}
                                                         className={styles['timeline-content']}
                                                         style={{
-                                                            background: (dad[0].type === dad[0].type) ? dad[0].color : ''
+                                                            background: (typeof dad[0].type === 'number') ? dad[0].color : ''
                                                         }}
-                                                        // onClick={this.show.bind(this, sub)}
                                                     >
                                                         <div className={styles['icon-arrow']}
                                                             style={{
-                                                                borderRightColor: (dad[0].type === dad[0].type) ? dad[0].color : ''
+                                                                borderRightColor: (typeof dad[0].type === 'number') ? dad[0].color : ''
                                                             }}></div>
                                                         <div className={styles['content-details']}>
                                                             <p>{sub.event}</p>
