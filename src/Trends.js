@@ -56,16 +56,6 @@ class App extends Component {
           return textCfg;
         }
       });
-      // chart.axis('tem', {
-      //   grid: function grid(text) {
-      //     if (text === '0%') {
-      //       return {
-      //         lineDash: null,
-      //         lineWidth: 1
-      //       };
-      //     }
-      //   }
-      // });
       chart.legend({
         position: 'top',
         align: 'center',

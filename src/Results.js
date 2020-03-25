@@ -8,7 +8,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updateTime: '',
       sucess: false,
       showA: true,
       showB: false,
@@ -40,9 +39,7 @@ class App extends Component {
       showB: !this.state.showB
     })
   }
-  showChild(data) {
-    console.log(data)
-  }
+  
   componentWillMount() {
     Toast.loading('加载中', 0);
     this.getData()
@@ -112,7 +109,6 @@ class App extends Component {
             <div className={styles['content-scroll']} style={{ height: 300 }}>
               {data.sucess ? (
                 infos.domestic.list.map((res, index) => {
-                  // console.log(res)
                   return (
                     <div className={styles['ncov-child-content']} key={index}>
                       <span className={styles['ncov-child-content-item']}>{res.province}</span>
